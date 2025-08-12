@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>task | 4</title>
+    <style>
+        span {
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lesson__container">
+        <h1 class="lesson__title">Задача 4</h1>
+        <p>Вивести таблицю з 3 рядків і 7 стовпців
+
+        </p>
+    </div>
+
+    <script>
+        // задача 4
+        if (confirm('Почати тестування?')) {
+           
+            for (let countInline = 0; countInline < 3; countInline++) {
+                 document.write('<div style="display:inline-block; padding: 5px; border:1px solid #fff;">')
+                for (let countBlock = 0; countBlock < 7; countBlock++) {
+                    document.write(`<div style="display:inline-block; padding:15px; border:1px solid #fff;">${countBlock + 1}</div>`)
+                }
+                  document.write('</div><br>')
+            }
+
+          
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>task | 7</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 8px 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lesson__container">
+        <h1 class="lesson__title">Задача 7</h1>
+        <p>Вивести на екран N абзаців (N вводиться користувачем) за зразком:
+
+
+        </p>
+    </div>
+
+    <script>
+        // задача 7
+        if (confirm('Почати тестування?')) {
+            const ADD_USER_PARAGRAPH = parseInt(prompt('Введіть кількість параграфів', 2))
+            let paragraph = '<h1>заголовок 1 </h1>'
+            for (let i = 0; i < ADD_USER_PARAGRAPH; i++) {
+                paragraph += `<p>розділ 1, параграф ${i}</p>`
+
+            }
+            paragraph += ' <hr>'
+            document.write(paragraph)
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>task | 6</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 8px 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lesson__container">
+        <h1 class="lesson__title">Задача 6</h1>
+        <p>Вивести таблицю з 3 рядків і 7 стовпців
+
+        </p>
+    </div>
+
+    <script>
+        // задача 6
+        if (confirm('Почати тестування?')) {
+            let count = 1
+            for (let table = 0; table < 3; table++) {
+                document.write(' <table border="1" cellspacing="0" cellpadding="5">')
+                for (let tr = 0; tr < 3; tr++) {
+                    document.write(' <tr>')
+                    for (let td = 0; td < 3; td++) {
+                        document.write(`  <td>${count}</td>`)
+                        count++
+                    }
+                    document.write('</tr>')
+                }
+                document.write('</table>')
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

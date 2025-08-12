@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>task | 8.</title>
+    <style>
+        span {
+            font-size: 10px;
+        }
+
+        li {
+            list-style: circle inside !important;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lesson__container">
+        <h1 class="lesson__title">Задача 8.
+        </h1>
+        <p> Створити функцію, яка виводить банер (у функцію передаються: зображення, заголовок та посилання, куди
+            переходимо при кліку на зображення (тег img повине знаходитись у середині тега a
+        </p>
+    </div>
+
+    <script>
+        // задача 8
+        function createBanner(imgSrc, title, link) {
+            let banner = `<a href="${link}">
+                                <h1>${title}</h1>
+                                <img src="${imgSrc}"> 
+                          </a>`
+            document.write(banner)
+        }
+        createBanner('https://cakeshop.com.ua/images/AcpSe7kFpmzMfgJUwhyXbNbja_gwkleunua5ZVM9jTQ/h:5000/bG9jYWw/6Ly8vY2FrZXNob3AuY29tLnVhL3B1YmxpY19odG1sL3N0b3JhZ2UvYXBwL3B1YmxpYy9pbWcvcHJvZHVjdC81NzEzXzEuanBn', 'Вафельна картинка Губка Боб 2', 'https://cakeshop.com.ua/ua/product/vafelnaya-kartinka-gubka-bob-2/')
+
+    </script>
+
+</body>
+
+</html>

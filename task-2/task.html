@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>task | 7</title>
+    <style>
+        span {
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lesson__container">
+        <h1 class="lesson__title">Задача 7</h1>
+        <p>Створити функцію, яка випадковим чином виводить на екран одне із 4 зображень (шляхи до зображень передаються
+            у функцію)
+
+        </p>
+    </div>
+
+    <script>
+        // задача 7
+        function getRandomImages(imgsrc1, imgsrc2, imgsrc3, imgsrc4) {
+            let imgsrc
+            let random = 1 + Math.floor(Math.random() * 4)
+            switch (random) {
+                case 1: imgsrc = imgsrc1
+                break;
+                case 2: imgsrc = imgsrc2
+                break;
+                case 3: imgsrc = imgsrc3
+                break;
+                case 4: imgsrc = imgsrc4
+                break;
+                throw new Error("Неправильне значення!");// тут помилки виникнути не повинно, але додав
+            }
+            document.write(`<img src="${imgsrc}">`)
+        }
+        getRandomImages('https://i.pinimg.com/474x/bd/a8/0e/bda80e9324bd6d5c83b84b6eac5a1e5d.jpg','https://avatars.mds.yandex.net/i?id=dc7361b95e9b0527c543cbb558a72055_l-5878560-images-thumbs&n=27&h=480&w=480','https://media.istockphoto.com/id/1564441923/ru/%D1%84%D0%BE%D1%82%D0%BE/%D1%81%D1%82%D0%BE%D0%BF%D0%BA%D0%B0-%D0%BA%D0%B0%D0%BC%D0%BD%D0%B5%D0%B9-%D0%B2-%D1%81%D0%BF%D0%BE%D0%BA%D0%BE%D0%B9%D0%BD%D0%BE%D0%BC-%D0%BE%D0%BA%D0%B5%D0%B0%D0%BD%D0%B5.jpg?s=612x612&w=0&k=20&c=vglz1YmtOOOHgYJrCi3sYT3KpCwC75cRRsU3VIXOYpE=','https://cakeshop.com.ua/images/AcpSe7kFpmzMfgJUwhyXbNbja_gwkleunua5ZVM9jTQ/h:5000/bG9jYWw/6Ly8vY2FrZXNob3AuY29tLnVhL3B1YmxpY19odG1sL3N0b3JhZ2UvYXBwL3B1YmxpYy9pbWcvcHJvZHVjdC81NzEzXzEuanBn')
+    </script>
+
+</body>
+
+</html>

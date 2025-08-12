@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>task | 8</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="lesson__container">
+        <h1 class="lesson__title">Задача 8</h1>
+        <p>Користувач загадує число. За 3 спроби комп’ютер намагається вгадати число користувача (використати confirm).
+
+
+
+        </p>
+    </div>
+
+    <script>
+        // задача 8
+        if (confirm('Почати тестування?')) {
+            const userNamber = +prompt('введіть число щоб пк зміг його відгадати з 3 спроб', 1)
+            let randomNam
+            for (let i = 0; i < 3 ; i++) {
+                randomNam = 1 + Math.floor(Math.random() * 9)
+                if (userNamber === randomNam) {
+                    document.write(`ком'ютер відгадав число: ${userNamber}`)
+                    break 
+                }
+
+            }
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

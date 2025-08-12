@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>task | 6</title>
+    <style>
+        span {
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lesson__container">
+        <h1 class="lesson__title">Задача 6</h1>
+        <p>Створити функцію, яка створює таблицю з вказаною кількістю рядків і стовпців (таблиця заповнюється заданим
+            фіксованим повідомленням).
+
+        </p>
+    </div>
+
+    <script>
+        // задача 6
+        function buildTable(rows, cols) {
+            let table = '<table style="border-collapse: collapse; width: 80%; margin: 20px auto; font-family: Arial, sans-serif; font-size: 16px;">'
+
+            for (let i = 0; i < rows; i++) {
+                table += ' <tr> '
+
+                for (let j = 0; j < cols; j++) {
+                    if (i === 0) {
+                        table += ` <th style="border: 1px solid #ccc; padding: 10px 15px; text-align: center; background-color: #4CAF50; color: white; text-transform: uppercase;">Заголовок ${j + 1}</th>`
+                    }else table += `<td style="border: 1px solid #ccc; padding: 10px 15px; text-align: center;">Комірка ${i + 1}.${j + 1}</td>`;
+                    
+                }
+                table += ' </tr>'
+            }
+            table += ' </table >'
+            return table
+        }
+
+        document.write(buildTable(6, 4))
+    </script>
+
+</body>
+
+</html>

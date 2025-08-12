@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>task | 9</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="lesson__container">
+        <h1 class="lesson__title">Задача 9</h1>
+        <p>Користувач загадує число. Комп’ютер задає питання поки не вгадає число користувача (використати confirm).
+        </p>
+    </div>
+
+    <script>
+        // задача 9
+        if (confirm('Почати тестування?')) {
+            const userNumber = +prompt('введіть число щоб пк зміг його відгадати з 3 спроб', 1)
+
+            let success = true
+            let attempt = 1;
+            while (success) {
+                let max = 15
+                let min = 1
+                let randomNum = min + Math.floor(Math.random() * max)
+                if (userNumber === randomNum) {
+                    document.write(`упc, пк взадав число, це число: ${randomNum} з ${attempt}-ї спроби!`)
+                    success = false
+                    break
+                }
+                let questionNumber = 1 + Math.floor(Math.random() * 2)
+                if (questionNumber === 1) {
+                    let question = `це число більше за ${randomNum}`
+                    let resultConfirm = confirm(question)
+                    if (resultConfirm) {
+                        min += questionNumber
+                        console.log(randomNum);
+                        
+                    }
+                }
+                else {
+                    question = `це число менше за ${randomNum}`
+                    let resultConfirm = confirm(question)
+                    if (!resultConfirm) {
+                        max -= questionNumber
+                    }
+                }
+                 attempt++;
+            }
+        }
+
+        
+
+
+
+    </script>
+
+</body>
+
+</html>

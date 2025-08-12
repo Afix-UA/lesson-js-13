@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>task | 10</title>
+    <style>
+        span {
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lesson__container">
+        <h1 class="lesson__title">Задача 10</h1>
+        <p>Дано покази температур (довільна кількість). Розробити функцію, яка дозволить знайти середнє значення для
+            додатних показів температури.
+
+        </p>
+    </div>
+
+    <script>
+        // задача 10
+        // прийшлось всеж таки працювати з псевдомасивами, але максимально не хотів використовувати МЕТОДИ МАСИВІВ, тому ось якось так
+        function getAverageTemperaturesNoNegative(...temperatures) {
+            let averageTemperature = 0
+            let averageNambers = 0
+            while (averageNambers < temperatures.length) {
+                if (temperatures[averageNambers] < 0) {
+                    averageNambers++
+                    continue
+                }
+                averageTemperature += temperatures[averageNambers]
+                averageNambers++
+            }
+            averageTemperature = (averageTemperature / averageNambers).toFixed()
+            document.write(averageTemperature)
+        }
+        getAverageTemperaturesNoNegative(12, 32, 45, -23, 2, -30)
+
+    </script>
+
+</body>
+
+</html>
