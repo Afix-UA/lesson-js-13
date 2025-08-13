@@ -35,28 +35,48 @@
 
     <script>
         // задача 5
+
         function displayOutput(inches, showFunction) {
-            document.write(`${inches}  ${showFunction(inches)} <br>`)
+            let output
+                switch (showFunction.name) {
+                case "convertCmToInches":
+                    output = `${inches}см = ${showFunction(inches)} дюймів`
+                    break
+
+                case "convertKgToPounds":
+                    output = `${inches}кг = ${showFunction(inches)} фунтів`
+                    break
+
+                case "convertKmToMiles":
+                    output = `${inches}км = ${showFunction(inches)} миль`
+                    break
+
+                default:
+                    throw new Error("Невідомий тип конверсії")
+            }
+
+            document.write(`${output} <br>`)
+            // document.write(` ${showFunction(inches)} <br> `)
         }
         // 
-        let centimeters = 12
+        let centimeters = 14
         function convertCmToInches(sm) {
             let res = (sm / 2.54).toFixed(1)
-            return `см = ${res} дюймів`
+            return res
         }
         displayOutput(centimeters, convertCmToInches)
         // 
-        let kilogram = 12
+        let kilogram = 15
         function convertKgToPounds(kg) {
             let res = (kg * 2.20462).toFixed(1)
-            return `кг = ${res} фунтів`
+            return res
         }
         displayOutput(kilogram, convertKgToPounds)
         // 
-        let kilometrs = 23
+        let kilometrs = 28
         function convertKmToMiles(km) {
             let res = (km * 0.621371).toFixed(1)
-            return `км = ${res} миль`
+            return res
         }
         displayOutput(kilometrs, convertKmToMiles)
 
