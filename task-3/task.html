@@ -23,21 +23,59 @@
     <div class="lesson__container">
         <h1 class="lesson__title">Задача 8.
         </h1>
-        <p> Створити функцію, яка виводить банер (у функцію передаються: зображення, заголовок та посилання, куди
-            переходимо при кліку на зображення (тег img повине знаходитись у середині тега a
+        <p> Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим чином
+            значеннями від -500 до 500). Надаючи користувачу можливість вибирати номери елементів (поки він не
+            відмовиться). Знаходити сумарний виграш.
+
         </p>
     </div>
 
     <script>
         // задача 8
-        function createBanner(imgSrc, title, link) {
-            let banner = `<a target="_blank" href="${link}">
-                                <h1>${title}</h1>
-                                <img src="${imgSrc}"> 
-                          </a>`
-            document.write(banner)
+
+        function totalWinPush(min, max, arrayLenght) {  // функція яка створює та наповнює числами масив
+            let totalWin = []
+            while (arrayLenght > totalWin.length) {
+                let randomWinNambers = min + Math.floor(Math.random() * (max - min + 1))
+                totalWin.push(randomWinNambers)
+            }
+            return totalWin
         }
-        createBanner('https://cakeshop.com.ua/images/AcpSe7kFpmzMfgJUwhyXbNbja_gwkleunua5ZVM9jTQ/h:5000/bG9jYWw/6Ly8vY2FrZXNob3AuY29tLnVhL3B1YmxpY19odG1sL3N0b3JhZ2UvYXBwL3B1YmxpYy9pbWcvcHJvZHVjdC81NzEzXzEuanBn', 'Вафельна картинка Губка Боб 2', 'https://cakeshop.com.ua/ua/product/vafelnaya-kartinka-gubka-bob-2/')
+        function placeNumberBet(maxAttempts, arrayLenght) { //функція яка дозволяє користувачу обрати комірки
+            const userCells = []
+            for (let i = 0; i < maxAttempts; i++) {
+                const chosenNumber = parseInt(prompt(`введіть число комірки що дізнатись свій виграш від 1 до ${arrayLenght}`))
+                if (chosenNumber && chosenNumber < arrayLenght) {
+                    userCells.push(chosenNumber)
+                } else alert(`число ${chosenNumber} не відповідає умовам гри( уважніше буль-ласка)`)
+
+            }
+            return userCells
+        }
+        function resultSumGame(totalWin, userCells) {
+            let resultSum = 0
+            for (let i = 0; i < userCells.length; i++) {
+                resultSum += totalWin[userCells[i]]
+            }
+            return resultSum
+        }
+        function dislayOutWins(wins) { // фунція виводу на екран виграшу
+            document.write(` <div class="lesson__container">Ваш виграш склав: ${wins}грн.<div>`)
+        }
+        function initGame() {  // фунція ініціалізації та запуску гри
+            const arrayLenght = randomLenghtArray = 5 + Math.floor(Math.random() * (50 - 5 + 1))
+            const minNam = -500
+            const maxNam = 500
+            let maxAttempts = randomWinNambers = 2 + Math.floor(Math.random() * (5 - 2 + 12))
+            if (maxAttempts > arrayLenght) initGame(params)
+
+            const totalWin = totalWinPush(minNam, maxNam, arrayLenght)
+            const userCells = placeNumberBet(maxAttempts, arrayLenght)
+            const resultWins = resultSumGame(totalWin, userCells)
+            dislayOutWins(resultWins)
+        }
+
+        if (confirm('почати Гру ')) initGame()
 
     </script>
 

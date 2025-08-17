@@ -17,26 +17,66 @@
 <body>
     <div class="lesson__container">
         <h1 class="lesson__title">Задача 9</h1>
-        <p> Дано покази температур (довільна кількість). Розробити функцію, яка дозволить підрахувати кількість
-            від’ємних показів температури.
+        <p> Морський бій. Користувач вводить кількість клітинок одновимірного масиву та кількість одиночних кораблів.
+            Комп’ютер довільно розміщує ці одиночні кораблі у масиві по один у клітинці (якщо у клітинці 0, то клітинка
+            пуста, якщо 1 – то це означає, що там є корабель. Користувач вводить номер клітинки, куди стріляє. Гра
+            продовжується до тих пір, поки не будуть потоплені усі кораблі.
+
         </p>
 
     </div>
 
     <script>
         // задача 9
-        // прийшлось всеж таки працювати з псевдомасивами, але максимально не хотів використовувати МЕТОДИ МАСИВІВ, тому ось якось так
-        function getAverageTemperatures(...temperatures) {
-            let averageTemperature = 0
-            let averageNambers = 0
-            while (averageNambers < temperatures.length) {
-                averageTemperature += temperatures[averageNambers]
-                averageNambers++
+        function initGame() {
+            const size = parseInt(prompt("Введіть розмір поля (кількість клітинок):"))
+            const shipsCount = parseInt(prompt("Введіть кількість кораблів:"))
+            let field = new Array(size).fill(0);
+
+            function deployShips() {
+                let placed = 0
+                while (placed < shipsCount) {
+                    let position = Math.floor(Math.random() * size)
+                    if (field[position] === 0) {
+                        field[position] = 1
+                        placed++
+                    }
+                }
             }
-            averageTemperature = (averageTemperature / averageNambers).toFixed()
-            document.write(averageTemperature)
+            function russianWarshipGoToTheBottom() {
+                document.write('<div class="lesson__container"><img src="https://gdb.rferl.org/03a70000-0aff-0242-150f-08da1e208187_w1080_h608.jpg" </div>')
+            }
+            function combatPhase() {
+                deployShips()
+                let shipsRemaining = shipsCount
+                let collabsCheked = true
+                while (shipsRemaining >= 0) {
+                    if (!shipsRemaining) {
+                        alert('флот РФ знищений, ЗСУ найкращі(не забувай дотатити)!!!')
+                        collabsCheked = false
+                        russianWarshipGoToTheBottom()
+                        break
+                    }
+                    const shot = parseInt(prompt("зробіть свій постріл:"))
+                    if (shot < 0 || shot >= size || isNaN(shot)) {
+                        alert("Невірна клітинка! Введіть число в діапазоні.")
+                        continue
+                    }
+                    if (field[shot] === 1) {
+                        alert('флот РФ значно зменшився, так тримати!!!')
+                        field[shot] = 0
+                        shipsRemaining--
+                    } else {
+                        alert("Промах! Тут немає корабля.")
+                    }
+
+                }
+            }
+            combatPhase()
+
         }
-        getAverageTemperatures(12, 32, 45, -23, 2, -30)
+        initGame()
+
 
     </script>
 

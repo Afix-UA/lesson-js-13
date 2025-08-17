@@ -29,18 +29,17 @@
         function getAverageTemperaturesNoNegative(...temperatures) {
             let averageTemperature = 0
             let averageNambers = 0
-            while (averageNambers < temperatures.length) {
-                if (temperatures[averageNambers] < 0) {
+            for (let i = 0; i < temperatures.length; i++) {
+                if (temperatures[i] > 0) {
+                    averageTemperature += temperatures[i]
                     averageNambers++
-                    continue
                 }
-                averageTemperature += temperatures[averageNambers]
-                averageNambers++
+                
             }
             averageTemperature = (averageTemperature / averageNambers).toFixed()
-            document.write(averageTemperature)
+            return averageTemperature
         }
-        getAverageTemperaturesNoNegative(12, 32, 45, -23, 2, -30)
+        document.write(getAverageTemperaturesNoNegative(12, 32, 45, -23, 2, -30))
 
     </script>
 

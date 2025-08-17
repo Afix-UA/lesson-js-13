@@ -23,62 +23,41 @@
     <div class="lesson__container">
         <h1 class="lesson__title">Задача 5.
         </h1>
-        <p>Створити окремі функції, які переводять:
-        <ul>
-            <li> Сантиметри у дюйми; </li>
-            <li> Кілограми у фунти; </li>
-            <li> Кілометри у милі.</li>
-        </ul>
-
+        <p> Дано послідовність оцінок учня. Підрахувати кількість:
+            1) двійок
+            2) кількість хороших оцінок (добре, відмінно);
+            3) кількість оцінок, які нижче середнього.
         </p>
     </div>
 
     <script>
         // задача 5
+        let gradesArr = [12, 7, 9, 10, 5, 8, 2, 3, 7, 1,14];
+        let countBelowAverage = 0,// кількість нижче середнього
+            numOfTwos = 0, // кількість двійок
+            appraisementExcellent = 0 //відмінно
 
-        function displayOutput(inches, showFunction) {
-            let output
-                switch (showFunction.name) {
-                case "convertCmToInches":
-                    output = `${inches}см = ${showFunction(inches)} дюймів`
-                    break
 
-                case "convertKgToPounds":
-                    output = `${inches}кг = ${showFunction(inches)} фунтів`
-                    break
+        function convertGrade(grades) {
+            for (let i = 0; i < grades.length; i++) {
+                let grade = grades[i];
+                if (grade === 2) numOfTwos++;
+                if (grade >= 1 && grade <= 6) countBelowAverage++;
+                else if (grade <= 12) appraisementExcellent++;
+                else console.log("Невідома оцінка:", grade);
 
-                case "convertKmToMiles":
-                    output = `${inches}км = ${showFunction(inches)} миль`
-                    break
 
-                default:
-                    throw new Error("Невідомий тип конверсії")
+
             }
 
-            document.write(`${output} <br>`)
-            // document.write(` ${showFunction(inches)} <br> `)
+
         }
-        // 
-        let centimeters = 14
-        function convertCmToInches(sm) {
-            let res = (sm / 2.54).toFixed(1)
-            return res
+        if (confirm('почати тестування?')) {
+            convertGrade(gradesArr)
+            document.write(`кількість нижче середнього: ${countBelowAverage}<br>`);
+            document.write(`кількість двійок: ${numOfTwos}<br>`);
+            document.write(`відмінно: ${appraisementExcellent}<br>`);
         }
-        displayOutput(centimeters, convertCmToInches)
-        // 
-        let kilogram = 15
-        function convertKgToPounds(kg) {
-            let res = (kg * 2.20462).toFixed(1)
-            return res
-        }
-        displayOutput(kilogram, convertKgToPounds)
-        // 
-        let kilometrs = 28
-        function convertKmToMiles(km) {
-            let res = (km * 0.621371).toFixed(1)
-            return res
-        }
-        displayOutput(kilometrs, convertKmToMiles)
 
 
     </script>

@@ -17,33 +17,26 @@
 <body>
     <div class="lesson__container">
         <h1 class="lesson__title">Задача 6</h1>
-        <p>Створити функцію, яка створює таблицю з вказаною кількістю рядків і стовпців (таблиця заповнюється заданим
-            фіксованим повідомленням).
+        <p>Дано послідовність цін товарів та назв (у окремих масивах). Вивести на екран ті, які може собі дозволити
+            користувач (кількість грошей задається).
+            Приклад збереження даних
+
 
         </p>
     </div>
 
     <script>
         // задача 6
-        function buildTable(rows, cols) {
-            let table = '<table style="border-collapse: collapse; width: 80%; margin: 20px auto; font-family: Arial, sans-serif; font-size: 16px;">'
-
-            for (let i = 0; i < rows; i++) {
-                table += ' <tr> '
-
-                for (let j = 0; j < cols; j++) {
-                    if (i === 0) {
-                        table += ` <th style="border: 1px solid #ccc; padding: 10px 15px; text-align: center; background-color: #4CAF50; color: white; text-transform: uppercase;">Заголовок ${j + 1}</th>`
-                    }else table += `<td style="border: 1px solid #ccc; padding: 10px 15px; text-align: center;">Комірка ${i + 1}.${j + 1}</td>`;
-                    
-                }
-                table += ' </tr>'
+        let products = ["Хліб", "Молоко", "Сир", "Яблука", "М'ясо"]
+        let prices = [25, 40, 120, 60, 250]
+        let money = parseInt(prompt("Введіть кількість грошей:"))
+        document.write(' <div class="lesson__container">Ви можете купити:')
+        for (let i = 0; i < products.length && i < prices.length; i++) {
+            if (prices[i] <= money) {
+                document.write(`${products[i]}  —  ${prices[i]}  грн <br>`);
             }
-            table += ' </table >'
-            return table
         }
-
-        document.write(buildTable(6, 4))
+        document.write(' </div')
     </script>
 
 </body>
