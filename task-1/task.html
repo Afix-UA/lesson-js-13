@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/style.css">
-    <title>task | 6</title>
+    <title>task | 2</title>
     <style>
         span {
             font-size: 10px;
@@ -16,27 +16,93 @@
 
 <body>
     <div class="lesson__container">
-        <h1 class="lesson__title">Задача 6</h1>
-        <p>Дано послідовність цін товарів та назв (у окремих масивах). Вивести на екран ті, які може собі дозволити
-            користувач (кількість грошей задається).
-            Приклад збереження даних
+        <h1 class="lesson__title">Задача 2</h1>
+        <p> Задача 2</p>
+        <p> Дано інформацію про прибуток К магазинів протягом тижня. Знайти :
+        <ul>
+            <li>Дано інформацію про прибуток <b>К магазинів</b> протягом тижня. Знайти:
+                <ol>
+                    <li>Загальний прибуток кожного масиву за тиждень</li>
+                    <li>Загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів
+                        за понеділок, за вівторок, і т.д.)</li>
+                    <li>Загальний прибуток за робочі дні</li>
+                    <li>Загальний прибуток за вихідні дні</li>
+                    <li>Максимальний прибуток за середу</li>
+                    <li>Сформувати загальний список (одновимірний масив) зі значенням, які що більші
+                        за 200</li>
+                    <li>Відсортувати кожен тиждень за зростанням</li>
+                    <li>Відсортувати тижні (рядки) за спаданням максимального елемента у цьому тижні
+                        (рядку), тобто при порівнянні рядків потрібно порівнювати максимальні
+                        елементи у кожному з цих рядків</li>
+                    <li>Упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при
+                        порівнянні двох рядків треба знайти суму кожного з рядків і порівнювати ці
+                        суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше)
+                    </li>
+                </ol>
+            </li>
+        </ul>
 
 
         </p>
     </div>
 
     <script>
-        // задача 6
-        let products = ["Хліб", "Молоко", "Сир", "Яблука", "М'ясо"]
-        let prices = [25, 40, 120, 60, 250]
-        let money = parseInt(prompt("Введіть кількість грошей:"))
-        document.write(' <div class="lesson__container">Ви можете купити:')
-        for (let i = 0; i < products.length && i < prices.length; i++) {
-            if (prices[i] <= money) {
-                document.write(`${products[i]}  —  ${prices[i]}  грн <br>`);
-            }
+        // задача 2
+        // Масив: кожен підмасив — це прибутки магазину за тиждень (Пн-Нд)
+        const profits = [
+            [120, 250, 300, 150, 200, 400, 500], // магазин 1
+            [100, 220, 330, 180, 210, 390, 410], // магазин 2
+            [130, 240, 310, 160, 220, 420, 430], // магазин 3
+            [140, 260, 320, 170, 230, 410, 440]  // магазин 4
+        ]
+        // 1. Загальний прибуток кожного масиву за тиждень
+        const totalProfitsPerStore = profits.map(store => store.reduce((acc, currentProfits) => acc + currentProfits, 0))
+        for (let store = 0; store < totalProfitsPerStore.length; store++) {
+            console.log(`Загальний прибуток магазину(${store + 1}) за тиждень:${totalProfitsPerStore[store]}грн`)
         }
-        document.write(' </div')
+
+        // 2. Загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.)
+        const maxDays = Math.max(...profits.map(store => store.length))
+        const totalProfitPerDay = new Array(maxDays).fill(0)
+        profits.forEach(store => store.forEach((value, dayIndex) => totalProfitPerDay[dayIndex] += value))
+        console.log(totalProfitPerDay)
+
+        //3. Загальний прибуток за робочі дні
+        const totalWeekdayProfit = profits.map(store => store.reduce((acc, value, index) => index < 5 ? acc + value : acc, 0))
+        console.log(`Загальний прибуток магазину робочі дні: ${totalWeekdayProfit} грн`)
+
+        //4. Загальний прибуток за вихідні дні
+        const totalWeekendProfit = profits.map(store => store.reduce((acc, value, index) => index > 5 ? acc + value : acc, 0))
+        console.log(`Загальний прибуток магазину робочі дні: ${totalWeekendProfit} грн`)
+
+        //5. Максимальний прибуток за середу
+        const maxWednesdayProfit = profits.reduce((max, store) => max < store[2] ? store[2] : max, -Infinity)
+        console.log(maxWednesdayProfit)
+
+        //6. Сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200
+        const over200 = profits.flat().filter(value => value > 200)
+        console.log(over200)
+
+        //7. Відсортувати кожен тиждень за зростанням
+        const weekAscending = profits.map(store => store.sort((a, b) => a - b))
+        console.log(weekAscending);
+
+        //8. Відсортувати тижні (рядки) за спаданням максимального елемента у цьому тижні
+        //   (рядку), тобто при порівнянні рядків потрібно порівнювати максимальні
+        //   елементи у кожному з цих рядків
+        const maxInRow = weekAscending.map(store => Math.max(store.at(-1))).sort((a, b) => b - a) // взяв обчислення попередньої задачи за основу
+        console.log(maxInRow);
+
+        //9. Упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при
+        // порівнянні двох рядків треба знайти суму кожного з рядків і порівнювати ці
+        // суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше)
+        const sortedWeeks = profits.sort((a, b) => {
+            let sumA = a.reduce((acc, value) => acc + value, 0)
+            let sumB = b.reduce((acc, value) => acc + value, 0)
+            return sumB - sumA
+        })
+        console.log(sortedWeeks);
+        
     </script>
 
 </body>

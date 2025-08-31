@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/style.css">
-    <title>task | 5.</title>
+    <title>task | 1</title>
     <style>
         span {
             font-size: 10px;
@@ -21,45 +21,110 @@
 
 <body>
     <div class="lesson__container">
-        <h1 class="lesson__title">Задача 5.
+        <h1 class="lesson__title">Задача 1
         </h1>
-        <p> Дано послідовність оцінок учня. Підрахувати кількість:
-            1) двійок
-            2) кількість хороших оцінок (добре, відмінно);
-            3) кількість оцінок, які нижче середнього.
+        <p> Знайти суми елементів у вказаній області (зафарбована область охоплює відповідну половину рядків і стовпців)
+
+
+
         </p>
+        <ol>
+            <li> Номери рядків від 0 до половини, стовпці від 0 до половини</li>
+            <li> Номери рядків від 0 до половини, стовпці від половини до кінця</li>
+            <li> Номери рядків від половини до кінця, стовпці від 0 до половини</li>
+            <li> Номери рядків від половини до кінця, стовпці від половини до кінця</li>
+            <li> Суму парних рядків</li>
+            <li> Суму непарних стовпців</li>
+            <li> У парних рядках – непарні стовпці, у непарних – парні.</li>
+        </ol>
     </div>
 
     <script>
-        // задача 5
-        let gradesArr = [12, 7, 9, 10, 5, 8, 2, 3, 7, 1,14];
-        let countBelowAverage = 0,// кількість нижче середнього
-            numOfTwos = 0, // кількість двійок
-            appraisementExcellent = 0 //відмінно
-
-
-        function convertGrade(grades) {
-            for (let i = 0; i < grades.length; i++) {
-                let grade = grades[i];
-                if (grade === 2) numOfTwos++;
-                if (grade >= 1 && grade <= 6) countBelowAverage++;
-                else if (grade <= 12) appraisementExcellent++;
-                else console.log("Невідома оцінка:", grade);
-
-
-
-            }
-
-
+        // задача 11
+        //=====================================допоміжні функції===================== 
+        // Функція для знаходження половини довжини масиву
+        function splitArrayInHalf(arr) {
+            let half = Math.ceil(arr.length / 2)
+            return half
         }
-        if (confirm('почати тестування?')) {
-            convertGrade(gradesArr)
-            document.write(`кількість нижче середнього: ${countBelowAverage}<br>`);
-            document.write(`кількість двійок: ${numOfTwos}<br>`);
-            document.write(`відмінно: ${appraisementExcellent}<br>`);
+        // Функція для знаходження останнього індексу масиву
+        function arrLastIndex(arr) {
+            return arr.length - 1
+        }
+        //=====================================основний код=====================
+        const arrNum = [
+            [1, 2, 3, 4],
+            [5, 6, 7, 8],
+            [9, 10, 11, 12],
+            [13, 14, 15, 16],
+            [13, 14, 15, 16],
+            [13, 14, 15, 16]
+        ];
+        // 1. Номери рядків від 0 до половини, стовпці від 0 до половини  
+        let sumFirstHalf = 0;
+        for (let coll = 0; coll < splitArrayInHalf(arrNum); coll++) {
+            for (let row = 0; row < splitArrayInHalf(arrNum[coll]); row++)  sumFirstHalf += arrNum[coll][row]
+        }
+        //2. Номери рядків від 0 до половини, стовпці від половини до кінця-------------------------------------------------
+        let sumLastHalf = 0;
+        for (let coll = 0; coll < splitArrayInHalf(arrNum); coll++) {
+            for (let row = splitArrayInHalf(arrNum); row < arrNum.length; row++)   sumLastHalf += arrNum[coll][row]
+        }
+        //3. Номери рядків від половини до кінця, стовпці від 0 до половини-------------------------------------------------
+        let bottomLeftPar = 0;
+        for (let coll = splitArrayInHalf(arrNum); coll < arrNum.length; coll++) {
+            for (let row = 0; row < splitArrayInHalf(arrNum[coll]); row++)  bottomLeftPar += arrNum[coll][row]
         }
 
+        //4. Номери рядків від половини до кінця, стовпці від половини до кінця
+        let bottomRightPart = 0;
+        for (let coll = splitArrayInHalf(arrNum); coll < arrNum.length; coll++) {
+            for (let row = splitArrayInHalf(arrNum); row < arrNum.length; row++)  bottomRightPart += arrNum[coll][row]
+        }
+        //5. Суму парних рядків
+        let sumEvenRows = 0
+        for (let i = 0; i <= arrLastIndex(arrNum); i += 2)   arrNum[i].forEach(el => sumEvenRows += el)
+        // рішення через continue більш складне, але робоче та на мою думку більш гнучке
+        // for (let i = 0; i <= arrLastIndex(arrNum);) {
+        //     if (i % 2 !== 0) {
+        //         i++
+        //         continue
+        //     }
+        //     else if (i === 0) {
+        //         i += 2
+        //         continue
+        //     }
 
+        //     else {
+        //         console.log('i =', i);
+        //         arrNum[i].forEach(el => {
+        //             sumEvenRows += el
+        //         })
+        //         i += 2
+        //     }
+        // }
+        //6.  Суму непарних стовпців
+        let sumOddRows = 0
+        for (let i = 1; i <= arrLastIndex(arrNum); i += 2) arrNum[i].forEach(el => sumOddRows += el)
+
+        //6. У парних рядках – непарні стовпці, у непарних – парні.
+        let sumOddCols = 0
+        let sumEvenCols = 0
+
+        for (let coll = 0; coll <= arrLastIndex(arrNum); coll++) {
+            if (coll % 2 === 0) for (let row = 1; row <= arrLastIndex(arrNum[coll]); row += 2)  sumEvenCols += arrNum[coll][row]
+            else for (let row = 0; row <= arrLastIndex(arrNum[coll]); row += 2)  sumOddCols += arrNum[coll][row]
+        }
+
+        //-------------------------------------------------
+        console.log('Сума елементів: рядки 0 до половини, стовпці 0 до половини =', sumFirstHalf);
+        console.log('Сума елементів: рядки 0 до половини, стовпці від половини до кінця =', sumLastHalf);
+        console.log('Сума елементів: рядки від половини до кінця, стовпці 0 до половини =', bottomLeftPar);
+        console.log('Сума елементів: рядки від половини до кінця, стовпці від половини до кінця =', bottomRightPart);
+        console.log('Сума парних рядків =', sumEvenRows);
+        console.log('Сума непарних рядків =', sumOddRows);
+        console.log('Сума для парних рядків і парних стовпців (sumEvenCols):', sumEvenCols);
+        console.log('Сума для непарних рядків і непарних стовпців (sumOddCols):', sumOddCols);
     </script>
 
 </body>

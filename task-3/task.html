@@ -45,7 +45,12 @@
             const userCells = []
             for (let i = 0; i < maxAttempts; i++) {
                 const chosenNumber = parseInt(prompt(`введіть число комірки що дізнатись свій виграш від 1 до ${arrayLenght}`))
-                if (chosenNumber && chosenNumber < arrayLenght) {
+                console.log(chosenNumber);
+
+                if (isNaN(chosenNumber)  ) {
+                    break
+                }
+                if (chosenNumber < arrayLenght) {
                     userCells.push(chosenNumber)
                 } else alert(`число ${chosenNumber} не відповідає умовам гри( уважніше буль-ласка)`)
 
@@ -74,6 +79,7 @@
             const resultWins = resultSumGame(totalWin, userCells)
             dislayOutWins(resultWins)
         }
+
 
         if (confirm('почати Гру ')) initGame()
 

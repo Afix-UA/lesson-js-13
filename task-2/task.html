@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/style.css">
-    <title>task | 7</title>
+    <title>task | 3</title>
     <style>
         span {
             font-size: 10px;
@@ -16,76 +16,85 @@
 
 <body>
     <div class="lesson__container">
-        <h1 class="lesson__title">Задача 7</h1>
-        <p>Задача 7. Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:
-            1 за весь рік;
-            2 у першій половині року;
-            3 у другій половині року;
-            4 за літо;
-            5 за ІІ квартал;
-            6 за парні місяці (з парними номерами);
-            7 за місяці, які є початковими у сезоні (весна, літо, осінь, зима).
+        <h1 class="lesson__title">Задача 3</h1>
+        <p>Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач
+            стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не
+            закінчаться снаряди.
+
         </p>
     </div>
 
     <script>
-        // задача 7
-        let payments = [1200, 1500, 1100, 1300, 1250, 1400, 1600, 1700, 1550, 1800, 2000, 2100];
-        function calculatePayments(payments, period) {
-            const halfYear = payments.length / 2
-            const quarter = halfYear - (halfYear / 2)
-            let result = 0
-            switch (period) {
-                case "year": //за рік
-                    for (let i = 0; i < payments.length; i++) {
-                        result += payments[i]
-                    }
-                    break
-                case "firstHalf": //перша половина
-                    for (let i = 0; i < halfYear; i++) {
-                        result += payments[i]
-                    }
-                    break
-                case "secondHalf"://друга половина
-                    for (let i = halfYear; i < payments.length; i++) {
-                        result += payments[i]
+        // задача 3
+        //----------    налаштування гри
+        const SHIP_COUNT = 2 // кількість кораблів на полі
+        const SIZE = 2       // кількість рядків та кількість стовпців
 
-                    }
-                    break
-
-                case "summer": // літо
-                    const summerLastMount = halfYear + quarter
-                    for (let i = halfYear; i < summerLastMount; i++) {
-                        result += payments[i]
-                        console.log(summerLastMount);
-                    }
-                    break
-
-                case "quarter2":
-                    for (let i = 0; i < quarter; i++) {
-                        result += payments[i]
-                        console.log(quarter);
-                    }
-                    break
-
-                case "evenMonths":
-                    let sum = 0;
-                    for (let i = 1; i < 12; i += 2) {
-                        result += payments[i];
-                    }
-                    break
-                case "seasonStart":
-                    for (let i = 2; i < payments.length; i += 3) {
-                        result += payments[i]
-                    }
-                    break
-                default: throw new Error("невідоме значення");
-                
+        let battlefieldArray
+        function placeShipsRandomly() {
+            battlefieldArray = new Array(SIZE).fill(null).map(() => new Array(SIZE).fill(0))
+            let shipsPlaced = 0;
+            while (shipsPlaced < SHIP_COUNT) {
+                const getRowRandom = 0 + Math.floor(Math.random() * SIZE)
+                const getColRandom = 0 + Math.floor(Math.random() * SIZE)
+                if (battlefieldArray[getRowRandom][getColRandom] === 0) {
+                    battlefieldArray[getRowRandom][getColRandom] = 1
+                    shipsPlaced++;
+                }
             }
-            return result
+            console.table(battlefieldArray)
         }
-        console.log(calculatePayments(payments, 'seasonStart'));
+        function inputShot() {
+            while (true) {
+                let shotInput = prompt(`введіть координату Y та  X через пробіл " " від 1 до ${SIZE}`)
+                if (shotInput === null) return null
 
+                let shotInputXY = shotInput.split(' ').map(coordinates => parseInt(coordinates))
+
+                if (shotInputXY.length !== 2 || shotInputXY.some(coordinates => isNaN(coordinates))) {
+                    alert('Невірне значення! Введіть два числа через пробіл.');
+                    continue
+                }
+                if (shotInputXY[0] < 1 || shotInputXY[0] > SIZE || shotInputXY[1] < 1 || shotInputXY[1] > SIZE) {
+                    alert(`Координати поза межами! Введіть числа від 1 до ${SIZE} для Y та від 1 до ${SIZE} для X.`);
+                    continue
+                }
+                return shotInputXY
+            }
+        }
+        function isHit() {
+            let destroyedShip = 0
+            while (destroyedShip < SHIP_COUNT) {
+                let shot = inputShot()
+                if (shot === null) return false
+                let y = shot[0] - 1;
+                let x = shot[1] - 1;
+                if (battlefieldArray[y][x] === 0) {
+                    alert(`ви промазали русня готовиться бити калібрами!!! в бойовій готовності ${SHIP_COUNT - destroyedShip} кораблів з загальним залпом ${(SHIP_COUNT - destroyedShip) * 16}`)
+                } else {
+                    destroyedShip++
+                    alert(`влучно!!!русні поменшало!!! але в бойовій готовності ${SHIP_COUNT - destroyedShip} кораблів з загальним залпом ${(SHIP_COUNT - destroyedShip) * 16}`)
+                }
+            }
+            if (destroyedShip === SHIP_COUNT) {
+                alert('дякую тобі!!! крим це Україна!!! чорноморський флот відчув "температуру на дні моря" ')
+                alert('дякую тобі за гру! не забувай донатити щоб ЗСУ могли так влучно стріляти як ти це робив у грі')
+                return true
+            }
+        }
+        function initGame() {
+            let restartGame
+            do {
+                placeShipsRandomly()
+                let finished = isHit()
+                if (!finished) {
+                    alert('Ви вийшли з гри.')
+                    break;
+                }
+                restartGame = prompt('Зіграти ще раз? Напишіть 1 і натисніть OK, якщо ні — просто відміна.')
+            } while (restartGame === '1')
+        }
+        initGame()
     </script>
 
 </body>
