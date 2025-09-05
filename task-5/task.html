@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/style.css">
-    <title>task | 10</title>
+     <script defer src="../dist/index5.js"></script>
+    <title>task | 7</title>
     <style>
         span {
             font-size: 10px;
@@ -16,32 +17,11 @@
 
 <body>
     <div class="lesson__container">
-        <h1 class="lesson__title">Задача 10</h1>
-        <p>Дано покази температур (довільна кількість). Розробити функцію, яка дозволить знайти середнє значення для
-            додатних показів температури.
-
+        <h1 class="lesson__title">Задача 7</h1>
+        <p> Сформувати двовимірний масив (4*8) з номерами днів (описати окремий тип для днів). Заповнити його випадковим чином. Підрахувати для кожного рядка кількість неділь.
         </p>
     </div>
 
-    <script>
-        // задача 10
-        // прийшлось всеж таки працювати з псевдомасивами, але максимально не хотів використовувати МЕТОДИ МАСИВІВ, тому ось якось так
-        function getAverageTemperaturesNoNegative(...temperatures) {
-            let averageTemperature = 0
-            let averageNambers = 0
-            for (let i = 0; i < temperatures.length; i++) {
-                if (temperatures[i] > 0) {
-                    averageTemperature += temperatures[i]
-                    averageNambers++
-                }
-                
-            }
-            averageTemperature = (averageTemperature / averageNambers).toFixed()
-            return averageTemperature
-        }
-        document.write(getAverageTemperaturesNoNegative(12, 32, 45, -23, 2, -30))
-
-    </script>
 
 </body>
 

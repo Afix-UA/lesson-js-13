@@ -1,102 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script defer src="../dist/index2.js"></script>
     <title>task | 3</title>
     <style>
-        span {
-            font-size: 10px;
-        }
+      span {
+        font-size: 10px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="lesson__container">
-        <h1 class="lesson__title">Задача 3</h1>
-        <p>Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач
-            стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не
-            закінчаться снаряди.
+      <h1 class="lesson__title">Задача 3</h1>
+      <p>
+      Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування включеннями.
 
-        </p>
+      </p>
     </div>
 
     <script>
-        // задача 3
-        //----------    налаштування гри
-        const SHIP_COUNT = 2 // кількість кораблів на полі
-        const SIZE = 2       // кількість рядків та кількість стовпців
-
-        let battlefieldArray
-        function placeShipsRandomly() {
-            battlefieldArray = new Array(SIZE).fill(null).map(() => new Array(SIZE).fill(0))
-            let shipsPlaced = 0;
-            while (shipsPlaced < SHIP_COUNT) {
-                const getRowRandom = 0 + Math.floor(Math.random() * SIZE)
-                const getColRandom = 0 + Math.floor(Math.random() * SIZE)
-                if (battlefieldArray[getRowRandom][getColRandom] === 0) {
-                    battlefieldArray[getRowRandom][getColRandom] = 1
-                    shipsPlaced++;
-                }
-            }
-            console.table(battlefieldArray)
-        }
-        function inputShot() {
-            while (true) {
-                let shotInput = prompt(`введіть координату Y та  X через пробіл " " від 1 до ${SIZE}`)
-                if (shotInput === null) return null
-
-                let shotInputXY = shotInput.split(' ').map(coordinates => parseInt(coordinates))
-
-                if (shotInputXY.length !== 2 || shotInputXY.some(coordinates => isNaN(coordinates))) {
-                    alert('Невірне значення! Введіть два числа через пробіл.');
-                    continue
-                }
-                if (shotInputXY[0] < 1 || shotInputXY[0] > SIZE || shotInputXY[1] < 1 || shotInputXY[1] > SIZE) {
-                    alert(`Координати поза межами! Введіть числа від 1 до ${SIZE} для Y та від 1 до ${SIZE} для X.`);
-                    continue
-                }
-                return shotInputXY
-            }
-        }
-        function isHit() {
-            let destroyedShip = 0
-            while (destroyedShip < SHIP_COUNT) {
-                let shot = inputShot()
-                if (shot === null) return false
-                let y = shot[0] - 1;
-                let x = shot[1] - 1;
-                if (battlefieldArray[y][x] === 0) {
-                    alert(`ви промазали русня готовиться бити калібрами!!! в бойовій готовності ${SHIP_COUNT - destroyedShip} кораблів з загальним залпом ${(SHIP_COUNT - destroyedShip) * 16}`)
-                } else {
-                    destroyedShip++
-                    alert(`влучно!!!русні поменшало!!! але в бойовій готовності ${SHIP_COUNT - destroyedShip} кораблів з загальним залпом ${(SHIP_COUNT - destroyedShip) * 16}`)
-                }
-            }
-            if (destroyedShip === SHIP_COUNT) {
-                alert('дякую тобі!!! крим це Україна!!! чорноморський флот відчув "температуру на дні моря" ')
-                alert('дякую тобі за гру! не забувай донатити щоб ЗСУ могли так влучно стріляти як ти це робив у грі')
-                return true
-            }
-        }
-        function initGame() {
-            let restartGame
-            do {
-                placeShipsRandomly()
-                let finished = isHit()
-                if (!finished) {
-                    alert('Ви вийшли з гри.')
-                    break;
-                }
-                restartGame = prompt('Зіграти ще раз? Напишіть 1 і натисніть OK, якщо ні — просто відміна.')
-            } while (restartGame === '1')
-        }
-        initGame()
+      // задача 3
+     
     </script>
-
-</body>
-
+  </body>
 </html>
